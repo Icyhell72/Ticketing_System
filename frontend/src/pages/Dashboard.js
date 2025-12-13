@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Search, Plus, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -12,22 +12,27 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [filters, setFilters] = useState({ category: '', status: '', search: '' });
-    const { getToken, isAdmin, user } = useAuth();
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const { getToken, isAdmin } = useAuth();
     const navigate = useNavigate();
 
-    const fetchTickets = async () => {
+    const fetchTickets = useCallback(async (urlOverride = null) => {
         setLoading(true);
         setError('');
 
         try {
-            let url = `${API_URL}/tickets/`;
-            const params = new URLSearchParams();
+            let url = urlOverride;
+            if (!url) {
+                url = `${API_URL}/tickets/`;
+                const params = new URLSearchParams();
 
-            if (filters.category) params.append('category', filters.category);
-            if (filters.status) params.append('status', filters.status);
-            if (filters.search) params.append('search', filters.search);
+                if (filters.category) params.append('category', filters.category);
+                if (filters.status) params.append('status', filters.status);
+                if (filters.search) params.append('search', filters.search);
 
-            if (params.toString()) url += `?${params.toString()}`;
+                if (params.toString()) url += `?${params.toString()}`;
+            }
 
             const response = await fetch(url, {
                 headers: { 'Authorization': `Bearer ${getToken()}` }
@@ -35,7 +40,15 @@ export default function Dashboard() {
 
             if (response.ok) {
                 const data = await response.json();
-                setTickets(data.results || data);
+                if (data.results) {
+                    setTickets(data.results);
+                    setNextPage(data.next);
+                    setPrevPage(data.previous);
+                } else {
+                    setTickets(data);
+                    setNextPage(null);
+                    setPrevPage(null);
+                }
             } else {
                 if (response.status === 401) {
                     navigate('/login');
@@ -47,11 +60,11 @@ export default function Dashboard() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [filters, getToken, navigate]);
 
     useEffect(() => {
         fetchTickets();
-    }, [filters]);
+    }, [fetchTickets]);
 
     const handleStatusUpdate = async (ticketId, newStatus) => {
         try {
@@ -84,14 +97,14 @@ export default function Dashboard() {
                             <input
                                 type="text"
                                 placeholder="Search tickets..."
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                 value={filters.search}
                                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
                             />
                         </div>
 
                         <select
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                             value={filters.category}
                             onChange={(e) => setFilters({ ...filters, category: e.target.value })}
                         >
@@ -102,7 +115,7 @@ export default function Dashboard() {
                         </select>
 
                         <select
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                             value={filters.status}
                             onChange={(e) => setFilters({ ...filters, status: e.target.value })}
                         >
@@ -116,7 +129,7 @@ export default function Dashboard() {
                     {!isAdmin() && (
                         <Link
                             to="/create"
-                            className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                            className="flex items-center space-x-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
                         >
                             <Plus className="w-4 h-4" />
                             <span>New Ticket</span>
@@ -133,7 +146,7 @@ export default function Dashboard() {
 
             {loading && (
                 <div className="text-center py-12">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
                     <p className="mt-4 text-gray-600">Loading tickets...</p>
                 </div>
             )}
@@ -150,13 +163,39 @@ export default function Dashboard() {
                             </p>
                         </div>
                     ) : (
-                        tickets.map((ticket) => (
-                            <TicketCard
-                                key={ticket.id}
-                                ticket={ticket}
-                                onStatusUpdate={handleStatusUpdate}
-                            />
-                        ))
+                        <>
+                            {tickets.map((ticket) => (
+                                <TicketCard
+                                    key={ticket.id}
+                                    ticket={ticket}
+                                    onStatusUpdate={handleStatusUpdate}
+                                />
+                            ))}
+
+                            {/* Pagination Controls */}
+                            <div className="flex justify-between items-center mt-6">
+                                <button
+                                    onClick={() => fetchTickets(prevPage)}
+                                    disabled={!prevPage}
+                                    className={`px-4 py-2 rounded-lg font-medium transition ${prevPage
+                                        ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        }`}
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    onClick={() => fetchTickets(nextPage)}
+                                    disabled={!nextPage}
+                                    className={`px-4 py-2 rounded-lg font-medium transition ${nextPage
+                                        ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        }`}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </>
                     )}
                 </div>
             )}

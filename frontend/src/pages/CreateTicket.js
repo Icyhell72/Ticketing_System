@@ -70,7 +70,7 @@ export default function CreateTicket() {
                             <input
                                 type="text"
                                 required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                             />
@@ -80,7 +80,7 @@ export default function CreateTicket() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                             <textarea
                                 required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                 rows="6"
                                 value={formData.description}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -90,7 +90,7 @@ export default function CreateTicket() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                             <select
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                 value={formData.category}
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             >
@@ -103,7 +103,7 @@ export default function CreateTicket() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+                            className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50"
                         >
                             {loading ? 'Creating...' : 'Create Ticket'}
                         </button>

@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Ticketing System Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The client-side application for the Ticketing System, built with **React** and **Tailwind CSS**. This application provides an intuitive interface for users and admins to manage support tickets, featuring real-time chat and a responsive design.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Modern & Responsive UI**: Custom interface designed from scratch using **Tailwind CSS**. No heavy component libraries—just clean, utility-first CSS.
+- **Real-Time Support Chat**: Integrated **Tawk.to** widget for instant communication.
+- **Pagination**: User-friendly pagination controls (Next/Previous) to navigate through tickets.
+- **Ticket Management**:
+    - Users can create, view, and track their tickets.
+    - Admins have a comprehensive dashboard to filter and manage all tickets.
+- **Secure Authentication**: Seamless integration with the Django backend using JWT.
+- **File Attachments**: Easy file upload for providing context to support requests.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19.2.3**: JavaScript library for building user interfaces.
+- **Node v22.16.0** / **NPM 10.9.2**: Runtime and package manager.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Axios**: For making HTTP requests to the backend API.
+- **React Router**: For client-side routing.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation & Setup
 
-### `npm test`
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Icyhell72/Ticketing_System
+   cd frontend
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Start the Development Server**
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   The app will run in development mode.\
+   Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   The page will reload when you make changes.\
+   You may also see any lint errors in the console.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Build for Production
 
-### `npm run eject`
+To create a production-ready build:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm run build
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Design Template
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project's design was **built entirely from scratch** using Tailwind CSS utility classes. 
+We did **not** use any pre-made templates or component libraries (like Material UI or Bootstrap). The "simple template" look is a result of custom Tailwind configuration and manual layout design.
 
-## Learn More
+## How to Test Chat Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Ensure the frontend server is running (`npm start`) and you have internet access.
+2. The **Tawk.to widget** should appear in the bottom-right corner of the application.
+3. Click the widget to start a chat.
+4. To simulate an agent replying, log in to your [Tawk.to Dashboard](https://dashboard.tawk.to/).
+5. You can test the real-time messaging between the "user" (frontend) and "agent" (Tawk.to dashboard).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Resources
 
-### Code Splitting
+- [React Documentation](https://reactjs.org/docs/getting-started.html) 
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Tawk.to Developer Guide](https://developer.tawk.to/)
+- [How to Add Tawk.to to React (YouTube Tutorial)](https://www.youtube.com/watch?v=S4dEkkqMGv8)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Author
 
-### Analyzing the Bundle Size
+**Khaireddine Rhouma**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All Rights Reserved.

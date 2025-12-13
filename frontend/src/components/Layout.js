@@ -18,11 +18,11 @@ export default function Layout({ children }) {
             <div className="bg-white shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center space-x-4">
-                        <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
+                        <div className="bg-gradient-to-r from-green-500 to-teal-600 w-10 h-10 rounded-lg flex items-center justify-center">
                             <AlertCircle className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-gray-800">Ticket System</h1>
+                            <h1 className="text-xl font-bold text-gray-800">Ticketing System</h1>
                             <p className="text-sm text-gray-600">
                                 {user?.username} {isAdmin() && '(Admin)'}
                             </p>

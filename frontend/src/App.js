@@ -13,6 +13,7 @@ const PrivateRoute = ({ children }) => {
   return getToken() ? children : <Navigate to="/login" />;
 };
 
+
 function App() {
   return (
     <Router>

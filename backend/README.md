@@ -29,13 +29,11 @@ A Django-based REST API for managing support tickets. This system features role-
    python -m venv venv
    # Windows
    venv\Scripts\activate
-   # Mac/Linux
-   source venv/bin/activate
    ```
 
 3. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   python -m pip install django djangorestframework django-environ djangorestframework-simplejwt pillow
    ```
 
 4. **Environment Configuration**
@@ -72,14 +70,11 @@ A Django-based REST API for managing support tickets. This system features role-
 - **Login**: `POST /api/auth/login`
 - **Register**: `POST /api/auth/register`
 - **List/Create Tickets**: `GET/POST /api/tickets/`
-- **Token Debugger**: Open `JWT_token_Debuggerr.html` in your browser.
 
 ### How to Test APIs
 You can test the API endpoints using:
 1. **Django REST Framework Browsable API**: Navigate to `http://127.0.0.1:8000/api/tickets/` in your browser (requires logging in via the browsable interface or session).
 2. **Postman**: Import the endpoints and test with the `Authorization: Bearer <access_token>` header.
-3. **Included Debugger**: Use the `JWT_token_Debuggerr.html` file in the root directory to test token generation and valid claims simply by opening it in a browser.
-
 ## Resources & References
 
 This project was built using the following official documentation and tutorials:
@@ -92,5 +87,3 @@ This project was built using the following official documentation and tutorials:
 ## Author
 
 **Khaireddine Rhouma**
-
-All Rights Reserved.

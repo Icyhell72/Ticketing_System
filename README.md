@@ -8,7 +8,7 @@ A robust, full-stack ticketing support system designed to streamline issue track
 ```bash
 cd backend
 python -m venv venv
-pip install -r requirements.txt
+python-m pip install django djangorestframework django-environ djangorestframework-simplejwt pillow
 python manage.py migrate
 python manage.py runserver
 ```
@@ -30,7 +30,7 @@ For detailed instructions, see the [Backend README](backend/README.md) or [Front
 - **Real-Time Communication**: Integrated **Tawk.to** for live support chat.
 - **Pagination**: Efficient data loading with server-side pagination (5 tickets per page).
 - **Secure Authentication**: JWT-based authentication for secure session management.
-- **Modern UI/UX**: Custom-designed interface using **Tailwind CSS** (no pre-built heavy UI libraries).
+- **Modern UI/UX**: Custom-designed interface using **Tailwind CSS**.
 - **Attachments**: Support for file attachments on tickets.
 
 ## Tech Stack
@@ -62,5 +62,3 @@ The project is divided into two main applications:
 ## Author
 
 **Khaireddine Rhouma**
-
-All Rights Reserved.

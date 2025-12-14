@@ -172,7 +172,6 @@ export default function Dashboard() {
                                 />
                             ))}
 
-                            {/* Pagination Controls */}
                             <div className="flex justify-between items-center mt-6">
                                 <button
                                     onClick={() => fetchTickets(prevPage)}

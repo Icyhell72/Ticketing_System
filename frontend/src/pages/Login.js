@@ -27,7 +27,6 @@ export default function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                // Get user info
                 const userResponse = await fetch(`${API_URL}/user/`, {
                     headers: { 'Authorization': `Bearer ${data.access}` }
                 });
@@ -59,7 +58,7 @@ export default function Login() {
                     <div className="bg-gradient-to-r from-green-500 to-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <AlertCircle className="w-8 h-8 text-white" />
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-800">Ticket System</h1>
+                    <h1 className="text-3xl font-bold text-gray-800">Ticketing System</h1>
                     <p className="text-gray-600 mt-2">Sign in to your account</p>
                 </div>
 

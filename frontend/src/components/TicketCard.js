@@ -26,6 +26,22 @@ export default function TicketCard({ ticket, onStatusUpdate }) {
                 </div>
             </div>
 
+            {ticket.attachment && (
+                <div className="mb-4 p-3 bg-gray-50 rounded-lg flex items-center justify-between">
+                    <span className="text-sm text-gray-600 truncate max-w-[200px]">
+                        {ticket.attachment.split('/').pop()}
+                    </span>
+                    <a
+                        href={ticket.attachment}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:text-green-700 text-sm font-medium hover:underline"
+                    >
+                        Download Attachment
+                    </a>
+                </div>
+            )}
+
             {isAdmin() && (
                 <div className="border-t pt-4 flex flex-wrap gap-2">
                     {statuses.map(status => (
@@ -33,8 +49,8 @@ export default function TicketCard({ ticket, onStatusUpdate }) {
                             key={status}
                             onClick={() => onStatusUpdate(ticket.id, status)}
                             className={`px-3 py-1 rounded-lg text-sm transition border ${ticket.status === status
-                                    ? 'bg-blue-50 border-blue-200 text-blue-700 font-medium'
-                                    : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                                ? 'bg-blue-50 border-blue-200 text-blue-700 font-medium'
+                                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
                                 }`}
                             disabled={ticket.status === status}
                         >

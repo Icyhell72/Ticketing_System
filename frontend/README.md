@@ -43,17 +43,6 @@ The client-side application for the Ticketing System, built with **React** and *
    Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
    The page will reload when you make changes.\
-   You may also see any lint errors in the console.
-
-## Build for Production
-
-To create a production-ready build:
-
-```bash
-npm run build
-```
-
-This bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 
 ## Design Template
 
@@ -78,5 +67,3 @@ We did **not** use any pre-made templates or component libraries (like Material 
 ## Author
 
 **Khaireddine Rhouma**
-
-All Rights Reserved.

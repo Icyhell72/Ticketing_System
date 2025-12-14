@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const getToken = () => localStorage.getItem('access_token');
-    // ALLOW 'Admin' username to be admin for testing purposes
     const isAdmin = () => !!user?.is_staff || user?.username === 'Admin';
 
     useEffect(() => {
@@ -37,8 +36,7 @@ export const AuthProvider = ({ children }) => {
                         const userData = await response.json();
                         setUser(userData);
                     } else {
-                        // If token is invalid/expired, logout
-                        if (response.status === 401) logout();
+                    if (response.status === 401) logout();
                     }
                 } catch (error) {
                     console.error('Failed to restore session:', error);

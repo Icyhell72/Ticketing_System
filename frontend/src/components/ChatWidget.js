@@ -5,7 +5,6 @@ const TAWK_WIDGET_ID = '1jc9u66cs';
 
 const ChatWidget = () => {
     useEffect(() => {
-        // Check if script is already present to prevent duplicates
         if (document.getElementById('tawk-to-script')) return;
 
         window.Tawk_API = window.Tawk_API || {};
@@ -22,17 +21,15 @@ const ChatWidget = () => {
         })();
 
         return () => {
-            // Optional: Cleanup script if component unmounts? 
-            // Usually chat widgets are global, so we leave it.
         };
     }, []);
 
     if (TAWK_PROPERTY_ID === 'YOUR_PROPERTY_ID') {
         console.warn('Tawk.to Chat Widget: Please set your Property ID in src/components/ChatWidget.js');
-        return null; // Don't verify/render broken widget if ID is missing
+        return null;
     }
 
-    return null; // The widget renders itself outside the React tree
+    return null;
 };
 
 export default ChatWidget;

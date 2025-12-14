@@ -63,6 +63,5 @@ class TicketViewSet(viewsets.ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserRegistrationView(generics.CreateAPIView):
-    """View for user registration (Sign-Up)"""
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]

@@ -9,7 +9,8 @@ export default function CreateTicket() {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        category: 'Technical'
+        category: 'Technical',
+        attachment: null
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -21,14 +22,21 @@ export default function CreateTicket() {
         setLoading(true);
         setError('');
 
+        const data = new FormData();
+        data.append('title', formData.title);
+        data.append('description', formData.description);
+        data.append('category', formData.category);
+        if (formData.attachment) {
+            data.append('attachment', formData.attachment);
+        }
+
         try {
             const response = await fetch(`${API_URL}/tickets/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${getToken()}`,
-                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: data
             });
 
             if (response.ok) {
@@ -98,6 +106,15 @@ export default function CreateTicket() {
                                 <option value="Financial">Financial</option>
                                 <option value="Product">Product</option>
                             </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Attachment (Optional)</label>
+                            <input
+                                type="file"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                                onChange={(e) => setFormData({ ...formData, attachment: e.target.files[0] })}
+                            />
                         </div>
 
                         <button

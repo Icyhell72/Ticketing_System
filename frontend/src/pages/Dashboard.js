@@ -4,6 +4,7 @@ import { Search, Plus, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import Layout from '../components/Layout';
 import TicketCard from '../components/TicketCard';
+import TicketDetailsDialog from '../components/TicketDetailsDialog';
 
 const API_URL = 'http://127.0.0.1:8000/api';
 
@@ -14,6 +15,7 @@ export default function Dashboard() {
     const [filters, setFilters] = useState({ category: '', status: '', search: '' });
     const [nextPage, setNextPage] = useState(null);
     const [prevPage, setPrevPage] = useState(null);
+    const [selectedTicket, setSelectedTicket] = useState(null);
     const { getToken, isAdmin } = useAuth();
     const navigate = useNavigate();
 
@@ -169,8 +171,15 @@ export default function Dashboard() {
                                     key={ticket.id}
                                     ticket={ticket}
                                     onStatusUpdate={handleStatusUpdate}
+                                    onClick={() => setSelectedTicket(ticket)}
                                 />
                             ))}
+
+                            <TicketDetailsDialog
+                                ticket={selectedTicket}
+                                isOpen={!!selectedTicket}
+                                onClose={() => setSelectedTicket(null)}
+                            />
 
                             <div className="flex justify-between items-center mt-6">
                                 <button
